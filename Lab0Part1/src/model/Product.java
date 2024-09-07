@@ -5,8 +5,9 @@ package model;
  * BY Abdulkadir Ahmed
  */
 
+
 public class Product {
-   /* Attributes */
+	/* Attributes */
 	private String model; // type of model
 	private String finish; // color of model
 	private int storage; // storage of model
@@ -16,6 +17,10 @@ public class Product {
 	
 	/* Constructors 
 	 * if no constructor are declared a implicit default constructor is there*/
+	
+	public Product() {
+		// all attributes will be stored with their default values after an object is created
+	}
 	
 	/* Accessors */
 	
