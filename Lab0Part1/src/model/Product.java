@@ -22,7 +22,91 @@ public class Product {
 		// all attributes will be stored with their default values after an object is created
 	}
 	
-	/* Accessors */
+	/* Overloaded version of Product */
 	
-	/* Mutators */
+	public Product(String model, double orignalPrice) {
+		this.model = model;
+		this.originalPrice = orignalPrice;
+	}
+	
+	/* Accessors and Mutators */
+	
+	public String getModel() {
+		return this.model;
+	}
+	
+	
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getFinish() {
+		return this.finish;
+	}
+
+	public void setFinish(String finish) {
+		this.finish = finish;
+	}
+
+	public int getStorage() {
+		return this.storage;
+	}
+
+	public void setStorage(int storage) {
+		this.storage = storage;
+	}
+
+	public boolean hasCellularConnectivity() {
+		return this.hasCellularConnectivity;
+	}
+
+	public void setHasCellularConnectivity(boolean hasCellularConnectivity) {
+		this.hasCellularConnectivity = hasCellularConnectivity;
+	}
+
+	public double getOriginalPrice() {
+		return this.originalPrice;
+	}
+
+	public void setOriginalPrice(double originalPrice) {
+		this.originalPrice = originalPrice;
+	}
+
+	public double getDiscountValue() {
+		return this.discountValue;
+	}
+
+	public void setDiscountValue(double discountValue) {
+		this.discountValue = discountValue;
+	}
+	
+	public double getPrice() {
+		return (getOriginalPrice() - getDiscountValue());
+	}
+	
+	public String toString() {
+		/*
+		 * StringBuilder sb = new StringBuilder();
+		 * 
+		 * sb.append(getModel() + " " + getFinish() + " " + getStorage() + "GB " +
+		 * "(cellular connectivity: " + isHasCellularConnectivity() + "): $(" +
+		 * String.format("%.2f", getOriginalPrice()) + " - " + String.format("%.2f", +
+		 * getDiscountValue()) + ")");
+		 * 
+		 * return sb.toString();
+		 */
+		
+		/*
+		 * return (getModel() + " " + getFinish() + " " + getStorage() + "GB " +
+		 * "(cellular connectivity: " + isHasCellularConnectivity() + "): $(" +
+		 * String.format("%.2f", getOriginalPrice()) + " - " + String.format("%.2f",
+		 * getDiscountValue()) + ")");
+		 */
+		
+		String s = String.format("%s %s %dGB (cellular connectivity: %s): $(%.2f - %.2f)", 
+				getModel(), getFinish(), getStorage(), hasCellularConnectivity(), 
+				getOriginalPrice(), getDiscountValue());
+		
+		return s;		
+	}
 }
