@@ -1,12 +1,12 @@
 package console_apps;
 
 import model.Product;
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class ProductApp {
 
 	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
+		//Scanner input = new Scanner(System.in);
 		
 		Product p = new Product();
 
