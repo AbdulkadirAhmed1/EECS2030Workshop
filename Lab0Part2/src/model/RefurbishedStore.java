@@ -57,4 +57,65 @@ public class RefurbishedStore {
 		
 		this.addEntry(new Entry(serialNumber,new Product(model,originalPrice)));
 	}
+	
+	
+	public Product getProduct(String sn) {
+		int index = -1;
+		
+		for (int i = 0; i < this.noe; i++) {
+			if (this.entries[i].getSerialNumber().equals(sn)) {
+				index = i;
+			}
+		}
+		
+		if (index < 0) {
+			return null;
+		} else {
+			return this.entries[index].getProduct();
+		}
+	}
+	
+	public String[] getSpaceGreyOrPro() {
+		int count = 0;
+		int[] indices = new int[this.noe];
+		
+		for (int i = 0; i < this.noe; i++) {
+			Product p = this.entries[i].getProduct();
+			
+			if ((p.getModel().contains("Pro") || p.getFinish().contains("Space Grey"))  && p.getFinish() != null) {
+				indices[count] = i;
+				count++;
+			}			
+		}
+		
+		String[] sns = new String[count];
+		
+		for (int i = 0; i < count; i++) {
+			sns[i] = this.entries[indices[i]].getSerialNumber();
+		}
+		
+		return sns;
+	}
+	
+	public String[] getSpaceGreyPro() {
+		int count = 0;
+		int[] indices = new int[this.noe];
+		
+		for (int i = 0; i < this.noe; i++) {
+			Product p = this.entries[i].getProduct();
+			
+			if (p.getModel().contains("Pro") && p.getFinish() != null && p.getFinish().contains("Space Grey")) {
+				indices[count] = i;
+				count++;
+			}			
+		}
+		
+		String[] sns = new String[count];
+		
+		for (int i = 0; i < count; i++) {
+			sns[i] = this.entries[indices[i]].getSerialNumber();
+		}
+		
+		return sns;
+	}
 }
