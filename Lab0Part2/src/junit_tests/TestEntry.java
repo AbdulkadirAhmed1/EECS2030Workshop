@@ -1,5 +1,7 @@
 package junit_tests;
 
+//e.g
+
 import static org.junit.Assert.*;
 import model.*;
 

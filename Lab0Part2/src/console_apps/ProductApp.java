@@ -1,5 +1,7 @@
 package console_apps;
 
+// e.g
+
 import model.Entry;
 import model.Product;
 //import java.util.Scanner;

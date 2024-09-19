@@ -22,7 +22,7 @@ public class Product {
 		// all attributes will be stored with their default values after an object is created
 	}
 	
-	/* Overloaded version of Product */
+	/* Overloaded version of Product e.g */
 	
 	public Product(String model, double orignalPrice) {
 		this.model = model;

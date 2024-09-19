@@ -68,6 +68,7 @@ public class TestRefurbishedStore {
 		
 		rs.addEntry("7YM4PFZ779UB", "iPad Pro 10.5", 929.00); 
 		
+		// e.g
 		
 		assertTrue(rs.getNumberOfEntries() == 3);
 		assertTrue(rs.getPrivateEntriesArray().length == 5);

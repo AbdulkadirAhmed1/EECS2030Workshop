@@ -40,6 +40,7 @@ public class Entry {
 	 * the user to create a Product object and pass it as an argument
 	 * Instead we expect the user to pass a string model and a value or original price 
 	 */
+	// e.g
 	public void setProudct(String model,double originalPrice) {
 		this.product = new Product(model,originalPrice);
 	}

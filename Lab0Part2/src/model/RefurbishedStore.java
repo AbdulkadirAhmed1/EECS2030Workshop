@@ -32,6 +32,7 @@ public class RefurbishedStore {
 	}
 	
 	//assume entry serial number here doesn't exist in the collection 
+	// e.g
 	public void addEntry(Entry entries) {
 		this.entries[this.noe] = entries;
 		this.noe++;
