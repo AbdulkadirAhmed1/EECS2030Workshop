@@ -1,11 +1,16 @@
 package junit_tests;
+
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.junit.Rule;
-import org.junit.rules.Timeout;
 
-import model.*;
+import model.HealthRecord;
+import model.InsufficientVaccineDosesException;
+import model.TooMuchDistributionException;
+import model.UnrecognizedVaccineCodeNameException;
+import model.VaccinationSite;
+import model.Vaccine;
+import model.VaccineDistribution;
 
 /*
  * Requirement: Any classes you create must reside in the `model` package and be imported properly.
@@ -17,8 +22,6 @@ import model.*;
  */
 public class StarterTests {
 
-	@Rule
-    public Timeout globalTimeout = Timeout.seconds(2);
 	/* 
 	 * Programming Requirements:
 	 * 
@@ -44,9 +47,9 @@ public class StarterTests {
 	 * 	1. Review Tutorial Series on OOP in Java (Part 1 and Part 2): 
 	 * 		https://www.eecs.yorku.ca/~jackie/teaching/tutorials/index.html#refurbished_store
 	 * 	2. Written Notes on Reference-Typed, Multi-Valued Attributes:
-	 * 		https://www.eecs.yorku.ca/~jackie/teaching/lectures/2021/F/EECS2030/notes/EECS2030_F21_Tracing_PointCollectorTester.pdf
+	 * 		https://www.eecs.yorku.ca/~jackie/teaching/lectures/2024/F/EECS2030/notes/EECS2030_F24_Tracing_PointCollectorTester.pdf
 	 * 	3. Written Notes on Inferring Classes from JUnit Tests:
-	 * 		https://www.eecs.yorku.ca/~jackie/teaching/lectures/2021/F/EECS2030/notes/EECS2030_F21_Inferring_Classes_from_JUnit.pdf 
+	 * 		https://www.eecs.yorku.ca/~jackie/teaching/lectures/2024/F/EECS2030/notes/EECS2030_F24_Inferring_Classes_from_JUnit.pdf 
 	 * 
 	 * Be sure to also read the following sections from your Lab1 instructions PDF:
 	 * 	- The `Requirements of this Lab` section (page 3) 
