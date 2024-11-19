@@ -13,10 +13,16 @@ public class Follower {
 	protected int currentfollowChannels;
 	protected int removecurrentfollowIndexChannels;
 	
+	protected Channel[] watchChannels;
+	protected int currentWatchChannel;
+	
 	public Follower(String name) {
 		this.name = name;
 		this.removecurrentfollowIndexChannels = -1;
 		this.type = "Follower";
+		
+		this.watchChannels = new Channel[100];	
+		this.currentWatchChannel = 0;
 	}
 	
 	@Override
@@ -76,6 +82,34 @@ public class Follower {
 				this.currentfollowChannels++;
 			}
 		}
+	}
+	
+	public void addCopyChannel(Channel watchChannel) {
+		this.watchChannels[this.currentWatchChannel++] = watchChannel;
+	}
+	
+	public boolean checkForCopy(String channelName) {
+		boolean copyFound = false;
+		
+		for (int i = 0; i < this.watchChannels.length; i++) {
+			if (this.watchChannels[i] != null) {
+				copyFound = this.watchChannels[i].channelName.equals(channelName);
+			}
+		}
+		
+		return copyFound;
+	}
+	
+	public int getWatchChannelLength() {
+		int length = 0;
+		
+		for (int i = 0; i < this.watchChannels.length; i++) {
+			if (this.watchChannels[i] != null) {
+				length += 1;
+			}
+		}
+		
+		return length;
 	}
 	
 	public void removefollowChannel(Channel c) {

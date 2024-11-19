@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class Channel {
@@ -16,15 +17,15 @@ public class Channel {
 	int currentFollower;
 	int removecurrentIndexFollower;
 	
-	//int viewers;
-	//int[] watchTime;
-	//int currentWatchTime;
+	int viewers;
+	int[] watchTime;
+	int currentWatchTime;
 	
 	public Channel(String channelName,int maxFollowers,int maxVideos) {
 		this.channelName = channelName;
 		this.maxFollowers = maxFollowers;
 		this.maxVideos = maxVideos;
-		//this.currentWatchTime = 0;
+		this.currentWatchTime = 0;
 		
 		this.removecurrentIndexFollower = -1;
 		this.videos = new String[maxVideos];
@@ -34,10 +35,41 @@ public class Channel {
 				+ "has no followers."
 				,this.channelName);
 		
-		//this.watchTime = new int[100];
+		this.watchTime = new int[100];
+	}
+	
+	//Shallow copy
+	
+	public Channel(Channel other) {
+		this.channelName = other.channelName;
+		this.maxFollowers = other.maxFollowers;
+		this.maxVideos = other.maxVideos;
+		this.currentWatchTime = 0;
+		
+		this.removecurrentIndexFollower = -1;
+		this.videos = new String[maxVideos];
+		this.followerlist = new Follower[maxFollowers];
+		
+		for (int i = 0; i < other.videos.length; i++) {
+			if (other.videos[i] != null) {
+				this.videos[i] = other.videos[i];
+			}
+		}
+		
+	    for (int i = 0; i < other.followerlist.length; i++) {
+			if (other.followerlist[i] != null) {
+				this.followerlist[i] = other.followerlist[i];
+			}
+		}
+		
+		this.status = String.format("%s released no videos and "
+				+ "has no followers."
+				,this.channelName);
+		
+		this.watchTime = new int[100];
 	}
 
-	/*public void addViewer() {
+	public void addViewer() {
 		viewers++;
 	}
 	
@@ -72,7 +104,7 @@ public class Channel {
 		if (amount > 0) {average = sum/amount;}
 		
 		return average;
-	}*/
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -172,6 +204,14 @@ public class Channel {
 				this.followerlist[this.removecurrentIndexFollower] = f;
 				this.removecurrentIndexFollower = -1;
 				this.currentFollower++;
+			}
+			
+			boolean foundCopy = f.checkForCopy(this.channelName);
+			
+			if (foundCopy == false) {
+			  Channel copyChannel = new Channel(this);
+			
+			  f.addCopyChannel(copyChannel);
 			}
 			
 			f.addfollowChannel(this);

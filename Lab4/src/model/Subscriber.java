@@ -67,9 +67,7 @@ public class Subscriber extends Follower {
 		}
 	}
 	
-	public Monitor findMonitor(Channel givenChannel,int watchTime, int Index) {
-		Monitor foundMonitor = null;
-		
+	public void findMonitor(Channel givenChannel,int watchTime) {
 		for (int i = 0; i < givenChannel.followerlist.length; i++) {
 			if (givenChannel.followerlist[i] != null) {
 				//I will use down-casting here:
@@ -80,15 +78,15 @@ public class Subscriber extends Follower {
 				if (givenChannel.followerlist[i].type == "Monitor") {
 					Monitor monitor = (Monitor) givenChannel.followerlist[i];
 					
-					monitor.addViewer(Index);
-					monitor.addWatchTime(Index,watchTime);
+					Channel copyChannel  = monitor.returnCopyChannel(givenChannel.channelName);
 					
-					monitor.updateStatus(givenChannel);
+					copyChannel.addViewer();
+					copyChannel.addWatchTime(watchTime);
+					
+					monitor.updateStatus(givenChannel,watchTime);
 				}
 			}
 		}
-		
-		return foundMonitor;
 	}
 	
 	public void watch(String video, int watchTime) {
@@ -101,11 +99,11 @@ public class Subscriber extends Follower {
 				for (int j = 0; j < givenChannel.videos.length; j++) {
 					if (givenChannel.videos[j] != null && givenChannel.videos[j] == video) {
 						foundChannel = true;
-					}
+					} 
 				}
 				
-				if (foundChannel == true) {
-					findMonitor(givenChannel,watchTime,i);
+				if (foundChannel == true) {				
+					findMonitor(givenChannel,watchTime);
 				}
 			}
 		}
