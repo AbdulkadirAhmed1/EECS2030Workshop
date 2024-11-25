@@ -15,7 +15,12 @@ public class Channel {
 	int maxVideos; 
 	int currentVideos;
 	int currentFollower;
+<<<<<<< HEAD
 
+=======
+	int removecurrentIndexFollower;
+	
+>>>>>>> 3bf04088723e664b1b15d94df6b4f75b15412690
 	int viewers;
 	int[] watchTime;
 	int currentWatchTime;
@@ -24,7 +29,13 @@ public class Channel {
 		this.channelName = channelName;
 		this.maxFollowers = maxFollowers;
 		this.maxVideos = maxVideos;
+<<<<<<< HEAD
 
+=======
+		this.currentWatchTime = 0;
+		
+		this.removecurrentIndexFollower = -1;
+>>>>>>> 3bf04088723e664b1b15d94df6b4f75b15412690
 		this.videos = new String[maxVideos];
 		this.followerlist = new Follower[maxFollowers];
 		
@@ -39,6 +50,33 @@ public class Channel {
 	
 	public Channel(Channel other) {
 		this.channelName = other.channelName;
+<<<<<<< HEAD
+=======
+		this.maxFollowers = other.maxFollowers;
+		this.maxVideos = other.maxVideos;
+		this.currentWatchTime = 0;
+		
+		this.removecurrentIndexFollower = -1;
+		this.videos = new String[maxVideos];
+		this.followerlist = new Follower[maxFollowers];
+		
+		for (int i = 0; i < other.videos.length; i++) {
+			if (other.videos[i] != null) {
+				this.videos[i] = other.videos[i];
+			}
+		}
+		
+	    for (int i = 0; i < other.followerlist.length; i++) {
+			if (other.followerlist[i] != null) {
+				this.followerlist[i] = other.followerlist[i];
+			}
+		}
+		
+		this.status = String.format("%s released no videos and "
+				+ "has no followers."
+				,this.channelName);
+		
+>>>>>>> 3bf04088723e664b1b15d94df6b4f75b15412690
 		this.watchTime = new int[100];
 	}
 
@@ -168,7 +206,31 @@ public class Channel {
 		if (foundCopy == false) {
 		  Channel copyChannel = new Channel(this);
 		
+<<<<<<< HEAD
 		  f.addCopyChannel(copyChannel);
+=======
+		if (this.currentFollower < this.maxFollowers) {
+			if (this.removecurrentIndexFollower == -1) {
+				this.followerlist[this.currentFollower++] = f;
+			} else {
+				this.followerlist[this.removecurrentIndexFollower] = f;
+				this.removecurrentIndexFollower = -1;
+				this.currentFollower++;
+			}
+			
+			boolean foundCopy = f.checkForCopy(this.channelName);
+			
+			if (foundCopy == false) {
+			  Channel copyChannel = new Channel(this);
+			
+			  f.addCopyChannel(copyChannel);
+			}
+			
+			f.addfollowChannel(this);
+			f.updateStatus();
+			
+			this.updateStatus();
+>>>>>>> 3bf04088723e664b1b15d94df6b4f75b15412690
 		}
 		
 		f.addfollowChannel(this);
