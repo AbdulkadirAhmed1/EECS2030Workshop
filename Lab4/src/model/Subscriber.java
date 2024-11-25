@@ -5,20 +5,16 @@ public class Subscriber extends Follower {
 	
 	String[] recommendedVideos;
 	int currentrecommendedVideos;
-	int removecurrentrecommendedVideos;
 	
 	public Subscriber(String name,int maxChannels,int maxVideos) {
 		super("Subscriber " + name);
 		super.maxChannels = maxChannels;
 		this.maxVideos = maxVideos;
-		this.removecurrentrecommendedVideos = -1;
 		
 		super.followChannels = new Channel[maxChannels];
 		this.recommendedVideos = new String[maxVideos];
 		
-		super.type = "Subscriber";
-		
-		super.status = type + " " + name + " follows no channels "
+		super.status = "Subscriber" + " " + name + " follows no channels "
 				+ "and has no recommended videos.";
 	}
 	
@@ -56,20 +52,10 @@ public class Subscriber extends Follower {
 	}
 	
 	public void addrecommendedVideo(String video) {
-		if (this.currentrecommendedVideos < this.maxVideos) {
-			if (this.removecurrentrecommendedVideos == -1) {
-				this.recommendedVideos[this.currentrecommendedVideos++] = video;
-			} else {
-				this.recommendedVideos[this.removecurrentrecommendedVideos] = video;
-				this.removecurrentrecommendedVideos = -1;		
-				this.currentrecommendedVideos++;
-			}
-		}
+		this.recommendedVideos[this.currentrecommendedVideos++] = video;
 	}
 	
-	public Monitor findMonitor(Channel givenChannel,int watchTime, int Index) {
-		Monitor foundMonitor = null;
-		
+	public void findMonitor(Channel givenChannel,int watchTime) {
 		for (int i = 0; i < givenChannel.followerlist.length; i++) {
 			if (givenChannel.followerlist[i] != null) {
 				//I will use down-casting here:
@@ -77,18 +63,18 @@ public class Subscriber extends Follower {
 				//Which is higher up and we have two options to downcast
 				//too which is Subscriber/Monitor
 				
-				if (givenChannel.followerlist[i].type == "Monitor") {
+				if (givenChannel.followerlist[i] instanceof Monitor) {
 					Monitor monitor = (Monitor) givenChannel.followerlist[i];
 					
-					monitor.addViewer(Index);
-					monitor.addWatchTime(Index,watchTime);
+					Channel copyChannel  = monitor.returnCopyChannel(givenChannel.channelName);
 					
-					monitor.updateStatus(givenChannel);
+					copyChannel.addViewer();
+					copyChannel.addWatchTime(watchTime);
+					
+					monitor.updateStatus(givenChannel,watchTime);
 				}
 			}
 		}
-		
-		return foundMonitor;
 	}
 	
 	public void watch(String video, int watchTime) {
@@ -101,11 +87,11 @@ public class Subscriber extends Follower {
 				for (int j = 0; j < givenChannel.videos.length; j++) {
 					if (givenChannel.videos[j] != null && givenChannel.videos[j] == video) {
 						foundChannel = true;
-					}
+					} 
 				}
 				
-				if (foundChannel == true) {
-					findMonitor(givenChannel,watchTime,i);
+				if (foundChannel == true) {				
+					findMonitor(givenChannel,watchTime);
 				}
 			}
 		}

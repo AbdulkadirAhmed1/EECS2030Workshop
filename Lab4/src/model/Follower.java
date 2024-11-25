@@ -7,16 +7,18 @@ public class Follower {
 	protected String name;
 	protected String status;
 	protected Channel[] followChannels;
-	protected String type;
 	
 	protected int maxChannels; //maximum channels to follow
 	protected int currentfollowChannels;
-	protected int removecurrentfollowIndexChannels;
+	
+	protected Channel[] watchChannels;
+	protected int currentWatchChannel;
 	
 	public Follower(String name) {
 		this.name = name;
-		this.removecurrentfollowIndexChannels = -1;
-		this.type = "Follower";
+		
+		this.watchChannels = new Channel[100];	
+		this.currentWatchChannel = 0;
 	}
 	
 	@Override
@@ -67,15 +69,49 @@ public class Follower {
 	}
 	
 	public void addfollowChannel(Channel c) {
-		if (this.currentfollowChannels < this.maxChannels) {
-			if (this.removecurrentfollowIndexChannels == -1) {
-				this.followChannels[this.currentfollowChannels++] = c;
-			} else {
-				this.followChannels[this.removecurrentfollowIndexChannels] = c;
-				this.removecurrentfollowIndexChannels = -1;		
-				this.currentfollowChannels++;
+		this.followChannels[this.currentfollowChannels++] = c;
+	}
+	
+	public void addCopyChannel(Channel watchChannel) {
+		this.watchChannels[this.currentWatchChannel++] = watchChannel;
+	}
+	
+	public boolean checkForCopy(String channelName) {
+		boolean copyFound = false;
+		
+		for (int i = 0; i < this.watchChannels.length; i++) {
+			if (this.watchChannels[i] != null) {
+				copyFound = this.watchChannels[i].channelName.equals(channelName);
 			}
 		}
+		
+		return copyFound;
+	}
+	
+	public Channel returnCopyChannel(String channelName) {
+		Channel copyChannel = null;
+		
+		for (int i = 0; i < this.watchChannels.length; i++) {
+			if (this.watchChannels[i] != null) {
+				if (this.watchChannels[i].channelName.equals(channelName)) {
+					copyChannel = this.watchChannels[i];
+				}
+			}
+		}
+		
+		return copyChannel;
+	}
+	
+	public int getWatchChannelLength() {
+		int length = 0;
+		
+		for (int i = 0; i < this.watchChannels.length; i++) {
+			if (this.watchChannels[i] != null) {
+				length += 1;
+			}
+		}
+		
+		return length;
 	}
 	
 	public void removefollowChannel(Channel c) {

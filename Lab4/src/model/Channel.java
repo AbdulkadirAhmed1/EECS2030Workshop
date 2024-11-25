@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class Channel {
@@ -14,19 +15,16 @@ public class Channel {
 	int maxVideos; 
 	int currentVideos;
 	int currentFollower;
-	int removecurrentIndexFollower;
-	
-	//int viewers;
-	//int[] watchTime;
-	//int currentWatchTime;
+
+	int viewers;
+	int[] watchTime;
+	int currentWatchTime;
 	
 	public Channel(String channelName,int maxFollowers,int maxVideos) {
 		this.channelName = channelName;
 		this.maxFollowers = maxFollowers;
 		this.maxVideos = maxVideos;
-		//this.currentWatchTime = 0;
-		
-		this.removecurrentIndexFollower = -1;
+
 		this.videos = new String[maxVideos];
 		this.followerlist = new Follower[maxFollowers];
 		
@@ -34,10 +32,17 @@ public class Channel {
 				+ "has no followers."
 				,this.channelName);
 		
-		//this.watchTime = new int[100];
+		this.watchTime = new int[100];
+	}
+	
+	//Shallow copy
+	
+	public Channel(Channel other) {
+		this.channelName = other.channelName;
+		this.watchTime = new int[100];
 	}
 
-	/*public void addViewer() {
+	public void addViewer() {
 		viewers++;
 	}
 	
@@ -72,7 +77,7 @@ public class Channel {
 		if (amount > 0) {average = sum/amount;}
 		
 		return average;
-	}*/
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -156,29 +161,20 @@ public class Channel {
 	}
 	
 	public void follow(Follower f) {
-		//[a,b,c,d,...] 
-		//counter=4
+		this.followerlist[this.currentFollower++] = f;
 		
-		//[a,b,null,d,...]
-		//counter=3
+		boolean foundCopy = f.checkForCopy(this.channelName);
 		
-		//[a,b,e,d,....]
-		//counter=4
+		if (foundCopy == false) {
+		  Channel copyChannel = new Channel(this);
 		
-		if (this.currentFollower < this.maxFollowers) {
-			if (this.removecurrentIndexFollower == -1) {
-				this.followerlist[this.currentFollower++] = f;
-			} else {
-				this.followerlist[this.removecurrentIndexFollower] = f;
-				this.removecurrentIndexFollower = -1;
-				this.currentFollower++;
-			}
-			
-			f.addfollowChannel(this);
-			f.updateStatus();
-			
-			this.updateStatus();
+		  f.addCopyChannel(copyChannel);
 		}
+		
+		f.addfollowChannel(this);
+		f.updateStatus();
+		
+		this.updateStatus();
 	}
 	
 	public void unfollow(Follower f) {
@@ -186,7 +182,6 @@ public class Channel {
 			if (this.followerlist[i] != null && this.followerlist[i].equals(f)) {
 				this.followerlist[i] = null;
 			    this.currentFollower--;
-			    this.removecurrentIndexFollower = i;
 				
 				f.removefollowChannel(this);
 				f.updateStatus();
@@ -203,18 +198,12 @@ public class Channel {
 		
 		for (int i = 0; i < followerlist.length; i++) {
 			if (this.followerlist[i] != null) {
-				//I will use down-casting here:
-				//Its safe because I know my reference here is Follower:
-				//Which is higher up and we have two options to downcast
-				//too which is Subscriber/Monitor
-				
-				if (this.followerlist[i].type == "Subscriber") {
+				if (this.followerlist[i] instanceof Subscriber) {
 					Subscriber follower = (Subscriber) this.followerlist[i];
 					
 					follower.addrecommendedVideo(videoName);
 					follower.updateStatus();
 				}
-				//this.followerlist[i].updateStatus();
 			}
 		}
 		
