@@ -1,3 +1,9 @@
 # EECS2030Workshop 
 
-EECS2030 Github workshop
+Labs: 
+
+-Lab 1
+-Lab 2
+-Lab 3
+-Lab 4
+-Lab 5 (Incomplete)
