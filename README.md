@@ -1,4 +1,4 @@
-# LE/EECS 2030 F - Advanced Object Oriented Programming (Fall 2024-2025) 
+# Java Projects
 
 Labs: 
 
