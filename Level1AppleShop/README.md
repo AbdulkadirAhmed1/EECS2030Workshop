@@ -1,5 +1,3 @@
-#  Level1AppleShop
+#  Level 1 Apple Shop
 
-TBA = To be added
-
-Description: TBA
+Description: To be added (~~TBA~~)....
