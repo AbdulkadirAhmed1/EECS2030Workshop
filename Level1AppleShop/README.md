@@ -1,9 +1,5 @@
-# Java Projects
+#  Level1AppleShop
 
-Labs: 
+TBA = To be added
 
-- Lab 1
-- Lab 2
-- Lab 3
-- Lab 4
-- Lab 5 (Incomplete)
+*Description:* TBA
