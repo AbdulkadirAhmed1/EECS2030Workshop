@@ -11,7 +11,7 @@ Projects:
 ## Apple Shop (Series) 
 
  - Level 1 Apple Shop (setup backbone for Level 2)
- - [Level 2 Apple Shop](./projects/Lab0Part1) (continues off of Level 1) 
+ - [Level 2 Apple Shop](./Lab0Part1) (continues off of Level 1) 
 
  - Level 3 Apple Shop (N/A)
 
