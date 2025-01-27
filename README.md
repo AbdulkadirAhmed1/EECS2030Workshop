@@ -2,7 +2,9 @@
 
 Author: Abdulkadir Ahmed
 
-**Note: All code shown here is backend code i.e meaning it isn't shown to the client however can be connected to a front-end or database**
+**Note: All projects shown here is backend i.e meaning it isn't shown to the client however can be connected to a front-end or database**
+
+*Another quick note: Every project includes comprehensive Junit tests to evaluate the application. However, this does not guarantee 100% correctness even with 10 or even 20 test cases.* 
 
 Projects: 
 
@@ -10,11 +12,12 @@ Projects:
 
 ## Apple Shop (Series) 
 
- - Level 1 Apple Shop (setup backbone for Level 2)
- - [Level 2 Apple Shop](./Lab0Part1) (continues off of Level 1) 
-
- - Level 3 Apple Shop (N/A)
+ - [Level 1 Apple Shop](./Level1AppleShop) (setups backbone for Level 2)
+ - [Level 2 Apple Shop](./Level2AppleShop) (continues off where Level 1 left off) 
+ - [Level 3 Apple Shop](./Level3AppleShop) Apple Shop (N/A)
 
 //-----------------------------------------------------///
 
-......
+..
+....
+...... **(to be added)**
