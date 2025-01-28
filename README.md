@@ -1,16 +1,23 @@
 # Java Projects
 
+## Table of contents 
+
+## 1.) [Projects](#projects)
+## 2.) Installation
+## 3.) Usage
+## 4.) Final remarks
+
 Author: Abdulkadir Ahmed
 
 **Note: All projects shown here is backend i.e meaning it isn't shown to the client however can be connected to a front-end or database**
 
 *Another quick note: Every project includes comprehensive Junit tests to evaluate the application. However, this does not guarantee 100% correctness even with 10 or even 20 test cases.* 
 
-Projects: 
+## Projects: 
 
 _________________________________________________________________________________________________________________________________________________________________________________
 
-## Apple Shop (Series) 
+### Apple Shop (Series) 
 
  - [Level 1 Apple Shop](./Level1AppleShop) (setups backbone for Level 2)
  - [Level 2 Apple Shop](./Level2AppleShop) (continues off where Level 1 left off) 
@@ -18,7 +25,7 @@ ________________________________________________________________________________
 
 _________________________________________________________________________________________________________________________________________________________________________________
 
-## App Store (Series)
+### App Store (Series)
 
 ..
 ....
